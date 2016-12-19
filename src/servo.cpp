@@ -22,7 +22,7 @@ void Servo::setPosition(Servo::ticks_t position)
 
 Servo::ticks_t Servo::position() const
 {
-	return Private::get_servo_position(m_port, nullptr);
+	return Private::get_servo_position(m_port, 0);
 }
 
 void Servo::disable()
@@ -42,5 +42,5 @@ void Servo::setEnabled(bool enabled)
 
 bool Servo::isEnabled() const
 {
-	return Private::get_servo_enabled(m_port, nullptr);
+	return Private::get_servo_enabled(m_port, 0);
 }

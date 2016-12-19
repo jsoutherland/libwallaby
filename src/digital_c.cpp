@@ -10,7 +10,7 @@
 
 int digital(int port)
 {
-	return Private::digital_value(port, nullptr);
+	return Private::digital_value(port, 0);
 }
 
 void set_digital_value(int port, int value)
@@ -20,7 +20,7 @@ void set_digital_value(int port, int value)
 
 int get_digital_value(int port)
 {
-	return (Private::digital_value(port, nullptr) ? 1 : 0);
+	return (Private::digital_value(port, 0) ? 1 : 0);
 }
 
 void set_digital_output(int port, int out)
@@ -30,7 +30,7 @@ void set_digital_output(int port, int out)
 
 int get_digital_output(int port)
 {
-	return (Private::digital_output(port, nullptr) ? 1 : 0);
+	return (Private::digital_output(port, 0) ? 1 : 0);
 }
 
 int get_digital_pullup(int port)

@@ -28,7 +28,7 @@
 #include <sys/stat.h>
 
 #ifndef NOT_A_WALLABY
-#include <linux/spi/spidev.h>
+//#include <linux/spi/spidev.h>
 #endif
 
 #include "tcp_client.hpp"
@@ -73,8 +73,8 @@ void Wallaby::atExit(bool should_abort)
 void WallabySigHandler(int s)
 {
 	//std::cout << "Caught signal " << s << std::endl;
-	auto cleanupThread = std::thread(Wallaby::atExit, true);
-	cleanupThread.detach();
+	//auto cleanupThread = std::thread(Wallaby::atExit, true);
+	//cleanupThread.detach();
 }
 
 Wallaby::Wallaby()
@@ -142,67 +142,7 @@ bool Wallaby::transfer(unsigned char * alt_read_buffer)
 
 	// TODO: make sure we have a valid (TCP?) connection to the simulator
 
-	const unsigned char * const read_buffer = (alt_read_buffer == nullptr) ? read_buffer_ : alt_read_buffer;
-
-	int status;
-
-	// transfer counter - used to detect missed packets on co-proc side
-	static unsigned char count = 0;
-	count += 1;
-
-	write_buffer_[0] = 'J';        //start
-	write_buffer_[1] = WALLABY_SPI_VERSION;          // version #
-	write_buffer_[2] = count;
-	write_buffer_[buffer_size_-1] = 'S'; // stop
-
-	struct spi_ioc_transfer	xfer[1];
-	memset(xfer, 0, sizeof xfer);
-
-	xfer[0].tx_buf = (unsigned long) write_buffer_;
-	xfer[0].rx_buf = (unsigned long) read_buffer;
-	xfer[0].len = buffer_size_;
-
-
-	if (using_tcp_)
-	{
-		// send xfer[0].tx_buf, then read rx_buf, both have size buffer_size_
-		//std::cout << "Send " << buffer_size_ << " to Sim..." << std::endl;
-		ssize_t num_sent = tcp_client_->send(write_buffer_, buffer_size_);
-		//std::cout <<  "Sent " << num_sent << " Now reading from Sim.." << std::endl;
-		ssize_t num_read = tcp_client_->receive(read_buffer_, buffer_size_);
-		//std::cout << "Read " << num_read << std::endl;
-	}
-	else
-	{
-		status = ioctl(spi_fd_, SPI_IOC_MESSAGE(1), xfer);
-
-		usleep(50); //FIXME: this  makes sure we don't outrun the co-processor until interrupts are in place for DMA
-
-		if (status < 0)
-		{
-			std::cerr << "Error (SPI_IOC_MESSAGE): " << strerror(errno) << std::endl;
-			return false;
-		}
-	}
-
-	update_count_ += 1;
-
-
-/* FIXME putback
-	if (read_buffer[0] != 'J')
-	{
-		std::cerr << " Error: DMA de-synchronized" << std::endl;
-
-		for (unsigned int i = 0; i < buffer_size_; ++i)
-		{
-			std::cerr << std::hex << static_cast<unsigned int>(read_buffer[i]) << " ";
-		}
-		std::cerr << std::endl;
-
-		return false;
-	}
-*/
-	return true;
+	return false;
 }
 
 unsigned char Wallaby::readRegister8b(unsigned char address, const unsigned char * alt_read_buffer)
@@ -380,7 +320,7 @@ void Wallaby::useTCP(bool setting)
 	{
 		if (tcp_client_ == nullptr)
 		{
-			tcp_client_ = new TCPClient("192.168.123.122", 11000); // FIXME dont hardcode
+			tcp_client_ = new TCPClient("192.168.123.136", 11000); // FIXME dont hardcode
 			std::cout << "Connecting to simulator..." << std::endl;
 			bool success = tcp_client_->connect();
 			if (success) std::cout << "Connected!" << std::endl;

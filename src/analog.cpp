@@ -23,7 +23,7 @@ Analog::~Analog()
 
 unsigned short Analog::value() const
 {
-	return Private::analog_value(m_port, nullptr);
+	return Private::analog_value(m_port, 0);
 }
 
 unsigned char Analog::port() const

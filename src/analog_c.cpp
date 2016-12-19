@@ -26,7 +26,7 @@ int analog10(int port)
 
 int analog12(int port)
 {
-	return Private::analog_value(port, nullptr);
+	return Private::analog_value(port, 0);
 }
 
 int analog_et(int port)

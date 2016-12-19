@@ -21,7 +21,7 @@ namespace Battery
   };
 }
 
-unsigned short battery_raw_reading(unsigned char * alt_read_buffer = nullptr);
+unsigned short battery_raw_reading(unsigned char * alt_read_buffer = 0);
 
 // TODO: move to battery source/header
 // TODO: doesn't allow for use of an alt_read_buffer

@@ -10,6 +10,7 @@
 
 int main(int argc, char ** argv)
 {
+	/*
 	graphics_open(100,100);
 
 	int x, j;
@@ -25,7 +26,7 @@ int main(int argc, char ** argv)
 	}
 
 	graphics_close();
-
+*/
 	return 0;
 }
 

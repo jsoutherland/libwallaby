@@ -10,17 +10,17 @@
 
 short magneto_x()
 {
-	return Private::magneto_x(nullptr);
+	return Private::magneto_x(0);
 }
 
 short magneto_y()
 {
-	return Private::magneto_y(nullptr);
+	return Private::magneto_y(0);
 }
 
 short magneto_z()
 {
-	return Private::magneto_z(nullptr);
+	return Private::magneto_z(0);
 }
 
 int magneto_calibrate()

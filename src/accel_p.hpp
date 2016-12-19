@@ -11,15 +11,15 @@
 namespace Private
 {
 
-short accel_x(unsigned char * alt_read_buffer = nullptr);
+short accel_x(unsigned char * alt_read_buffer = 0);
 
-short accel_y(unsigned char * alt_read_buffer = nullptr);
+short accel_y(unsigned char * alt_read_buffer = 0);
 
-short accel_z(unsigned char * alt_read_buffer = nullptr);
+short accel_z(unsigned char * alt_read_buffer =  0);
 
 bool accel_calibrate();
 
-bool accel_calibrated(unsigned char * alt_read_buffer = nullptr);
+bool accel_calibrated(unsigned char * alt_read_buffer = 0);
 
 }
 

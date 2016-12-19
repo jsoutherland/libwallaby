@@ -11,15 +11,15 @@
 namespace Private
 {
 
-short gyro_x(unsigned char * alt_read_buffer = nullptr);
+short gyro_x(unsigned char * alt_read_buffer = 0);
 
-short gyro_y(unsigned char * alt_read_buffer = nullptr);
+short gyro_y(unsigned char * alt_read_buffer = 0);
 
-short gyro_z(unsigned char * alt_read_buffer = nullptr);
+short gyro_z(unsigned char * alt_read_buffer = 0);
 
 bool gyro_calibrate();
 
-bool gyro_calibrated(unsigned char * alt_read_buffer = nullptr);
+bool gyro_calibrated(unsigned char * alt_read_buffer = 0);
 
 }
 

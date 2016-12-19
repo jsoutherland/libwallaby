@@ -35,12 +35,12 @@ void set_servo_enabled(int port, int enabled)
 
 int get_servo_enabled(int port)
 {
-	return (Private::get_servo_enabled(port, nullptr) ? 1 : 0);
+	return (Private::get_servo_enabled(port, 0) ? 1 : 0);
 }
 
 int get_servo_position(int port)
 {
-	return Private::get_servo_position(port, nullptr);
+	return Private::get_servo_position(port, 0);
 }
 
 void set_servo_position(int port, int position)

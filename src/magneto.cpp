@@ -10,17 +10,17 @@
 
 signed short Magneto::x()
 {
-	return Private::magneto_x(nullptr);
+	return Private::magneto_x(0);
 }
 
 signed short Magneto::y()
 {
-	return Private::magneto_y(nullptr);
+	return Private::magneto_y(0);
 }
 
 signed short Magneto::z()
 {
-	return Private::magneto_z(nullptr);
+	return Private::magneto_z(0);
 }
 
 bool Magneto::calibrate()
@@ -30,15 +30,15 @@ bool Magneto::calibrate()
 
 short MagnetoX::value() const
 {
-	return Private::magneto_x(nullptr);
+	return Private::magneto_x(0);
 }
 
 short MagnetoY::value() const
 {
-	return Private::magneto_y(nullptr);
+	return Private::magneto_y(0);
 }
 
 short MagnetoZ::value() const
 {
-	return Private::magneto_z(nullptr);
+	return Private::magneto_z(0);
 }

@@ -51,7 +51,7 @@ unsigned int fix_port(unsigned int port)
 
 unsigned char get_motor_mode(unsigned int port, unsigned char * alt_read_buffer)
 {
-  if (port < 0 || port > 3) return Motor::Inactive; // TODO: better fail code
+  if (port > 3) return Motor::Inactive; // TODO: better fail code
 
   const unsigned short offset = 2*fix_port(port);
 
