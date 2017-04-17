@@ -137,6 +137,7 @@ public:
             Model model = WHITE_2016);
   bool isOpen() const;
   bool close();
+  bool chessboardInView() const;
   bool update();
 
   void setWidth(const unsigned width);

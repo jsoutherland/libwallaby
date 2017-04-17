@@ -17,6 +17,7 @@
 #include <opencv2/core/core.hpp>
 #include <opencv2/highgui/highgui.hpp>
 #include <opencv2/imgproc/imgproc.hpp>
+#include <opencv2/calib3d/calib3d.hpp>
 
 #ifndef NOT_A_WALLABY
 #include <errno.h>
@@ -389,6 +390,24 @@ bool Camera::Device::close() {
     m_connected = false;
   }
   return true;
+#endif
+}
+
+bool Camera::Device::chessboardInView() const {
+#ifdef NOT_A_WALLABY
+  WARN("camera only supported on wallaby");
+  return false;
+#else
+  std::vector<cv::Vec2f> foundPoints;
+
+  int chessBoardFlags = cv::CALIB_CB_ADAPTIVE_THRESH |cv::CALIB_CB_NORMALIZE_IMAGE | cv::CALIB_CB_FAST_CHECK;
+
+  if(findChessboardCorners(m_image, cv::Size(6, 9), foundPoints, chessBoardFlags))
+  {
+    return true;
+  }
+
+  return false;
 #endif
 }
 
